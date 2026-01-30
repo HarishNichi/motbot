@@ -37,4 +37,4 @@ ENV NODE_ENV=production
 # This reduces the attack surface by preventing container escape via root privileges
 USER node
 
-CMD ["node", "openclaw.mjs", "gateway"]
+CMD ["node", "openclaw.mjs", "gateway", "--bind", "lan"]
