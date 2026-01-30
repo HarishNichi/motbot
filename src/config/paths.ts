@@ -220,6 +220,11 @@ export function resolveGatewayPort(
     const parsed = Number.parseInt(envRaw, 10);
     if (Number.isFinite(parsed) && parsed > 0) return parsed;
   }
+  // Standard PORT env var (e.g. Render, Heroku)
+  if (env.PORT) {
+    const parsed = Number.parseInt(env.PORT, 10);
+    if (Number.isFinite(parsed) && parsed > 0) return parsed;
+  }
   const configPort = cfg?.gateway?.port;
   if (typeof configPort === "number" && Number.isFinite(configPort)) {
     if (configPort > 0) return configPort;
