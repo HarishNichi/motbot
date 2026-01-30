@@ -160,8 +160,11 @@ function resolveApiKeyFromProfiles(params: {
 }
 
 export function normalizeGoogleModelId(id: string): string {
-  if (id === "gemini-3-pro") return "gemini-3-pro-preview";
-  if (id === "gemini-3-flash") return "gemini-3-flash-preview";
+  // Allow explicit 'gemini-3-pro' and 'gemini-3-flash' per user request (skip preview normalization)
+  if (id === "gemini-3-pro") return "gemini-3-pro";
+  if (id === "gemini-3-flash") return "gemini-3-flash";
+  if (id === "gemini-2.5-flash-preview") return "gemini-2.5-flash-preview";
+  if (id === "gemini-2.5-flash") return "gemini-2.5-flash";
   return id;
 }
 

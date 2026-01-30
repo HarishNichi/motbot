@@ -209,7 +209,17 @@ export async function monitorWebInbox(options: {
       }
 
       // If this is history/offline catch-up, mark read above but skip auto-reply.
-      if (upsert.type === "append") continue;
+      // If this is history/offline catch-up, mark read above but skip auto-reply.
+      // Exception: Support 'Note to Self' synced from phone (type: append, fromMe: true).
+      // We only allow recent messages to avoid reprocessing history.
+      if (upsert.type === "append") {
+        const isRecentNoteToSelf =
+          Boolean(msg.key?.fromMe) &&
+          typeof messageTimestampMs === "number" &&
+          messageTimestampMs >= connectedAtMs - 15_000;
+
+        if (!isRecentNoteToSelf) continue;
+      }
 
       const location = extractLocationData(msg.message ?? undefined);
       const locationText = location ? formatLocationText(location) : undefined;
