@@ -15,3 +15,5 @@ services:
         value: /opt/render/project/src/workspace
       - key: CLAWDBOT_GATEWAY_TOKEN
         generateValue: true
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=460"
