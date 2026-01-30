@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import module from "node:module";
+console.log(`[openclaw-wrapper] ARGV: ${JSON.stringify(process.argv)}`);
 
 // https://nodejs.org/api/module.html#module-compile-cache
 console.log(`[openclaw-wrapper] Starting gateway... (PORT=${process.env.PORT || "unset"}, BIND=${process.env.OPENCLAW_GATEWAY_BIND || "unset"})`);
